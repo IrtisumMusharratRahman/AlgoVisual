@@ -1,30 +1,98 @@
 package com.example.algovisual
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.algovisual.ui.AppBar
+import com.example.algovisual.ui.NavDrawerBody
+import com.example.algovisual.ui.NavDrawerHeader
 import com.example.algovisual.ui.theme.AlgoVisualTheme
+import com.example.algovisual.ui.theme.background
+import com.example.algovisual.ui.theme.bg2
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AlgoVisualTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Navigation()
+                MainScreen()
+            }
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    var navController:NavController = rememberNavController()
+    var pageName = remember {
+        mutableStateOf("Bubble Sort")
+    }
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        modifier = Modifier.fillMaxSize(),
+        backgroundColor = background,
+        topBar = {
+            AppBar(
+                iconClicked = {
+                    scope.launch {
+                        scaffoldState.drawerState.open()
+                    }
+                },
+                appBarTitle = {
+                    Text(text = pageName.value, textAlign = TextAlign.Center)
+                }
+            )
+        },
+//        drawerGesturesEnabled = scaffoldState.drawerState.isClosed,
+        drawerContent = {
+            NavDrawerHeader()
+            NavDrawerBody(){algoName->
+                pageName.value=algoName
+                when(algoName){
+                    "Bubble Sort" -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(NavScreens.BubbleSort.route)
+
+                    }
+                    "Selection Sort" -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(NavScreens.SelectionSort.route)
+                    }
+                    "Insertion Sort" -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(NavScreens.InsertionSort.route)
+                    }
                 }
             }
+        }
+
+    ) {
+        Navigation(){
+            navController=it
         }
     }
 }
