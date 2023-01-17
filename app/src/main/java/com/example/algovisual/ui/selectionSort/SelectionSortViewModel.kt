@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.SelectionSortAlgorithm
 import com.example.algovisual.model.SortItem
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,28 +12,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SelectionSortViewModel(
-    val selectionSortAlgorithm: SelectionSortAlgorithm = SelectionSortAlgorithm()
+    val selectionSortAlgorithm: SelectionSortAlgorithm = SelectionSortAlgorithm(),
+    val dataInitializer: DataInitializer = DataInitializer()
 ): ViewModel() {
-    private val list = mutableListOf<SortItem>()
+    private val initialList = listOf<Int>(40,70,30,10,20,80,50,90,60)
 
-    init {
-        list.add(SortItem(0,10,false,false, Color.Red))
-        list.add(SortItem(1,80,false,false, Color.Red))
-        list.add(SortItem(2,40,false,false, Color.Red))
-        list.add(SortItem(3,30,false,false, Color.Red))
-        list.add(SortItem(4,15,false,false, Color.Red))
-    }
+    private val list = dataInitializer(initialList)
 
     private val _itemList = MutableStateFlow(list)
     val itemList = _itemList.asStateFlow()
 
-    val lst = mutableListOf<SortItem>()
+    val lst = list.toCollection(mutableListOf())
     private var _sortItems = MutableStateFlow(lst)
     val sortItems = _sortItems.asStateFlow()
 
-
-    private val _abc = MutableStateFlow("Hi Its Starting")
-    val abc = _abc.asStateFlow()
 
     fun startSorting(){
         viewModelScope.launch {
@@ -42,12 +35,4 @@ class SelectionSortViewModel(
         }
     }
 
-    fun testing(){
-        viewModelScope.launch {
-//            delay(1000)
-            Log.e("TAG", "startSorting: ${sortItems.value.toString()}")
-            _abc.value="Hi Its Ending"
-
-        }
-    }
 }

@@ -21,19 +21,10 @@ fun BubbleSortScreen(
     navController: NavController,
     bubbleSortViewModel: BubbleSortViewModel = viewModel()
 ) {
-    val list = bubbleSortViewModel.itemList.collectAsState()
-    val str = bubbleSortViewModel.abc.collectAsState()
     val sortItem = bubbleSortViewModel.sortItems.collectAsState()
-
-    Log.e("TAG", "UI1: ${sortItem.value.toString()}")
-    
     
     Column() {
-        Log.e("TAG", "UI2: ${sortItem.value.toString()}")
-
-
         LazyColumn(){
-            Log.e("TAG", "UI3: ${sortItem.value.toString()}")
             items(
                 items=sortItem.value,
             ){
@@ -42,11 +33,6 @@ fun BubbleSortScreen(
         }
         Button(onClick = { bubbleSortViewModel.startSorting() }) {
             Text(text = "Sort")
-        }
-
-        Text(text = str.value)
-        Button(onClick = { bubbleSortViewModel.testing() }) {
-            Text(text = "Testing")
         }
     }
 

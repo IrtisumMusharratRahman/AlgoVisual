@@ -17,12 +17,9 @@ fun InsertionSortScreen(
     navController: NavController,
     insertionSortViewModel: InsertionSortViewModel= InsertionSortViewModel()
 ) {
-    val str = insertionSortViewModel.abc.collectAsState()
     val sortItem = insertionSortViewModel.sortItems.collectAsState()
 
-
     Column() {
-
         LazyColumn(){
             items(
                 items=sortItem.value,
@@ -32,11 +29,6 @@ fun InsertionSortScreen(
         }
         Button(onClick = { insertionSortViewModel.startSorting() }) {
             Text(text = "Sort")
-        }
-
-        Text(text = str.value)
-        Button(onClick = { insertionSortViewModel.testing() }) {
-            Text(text = "Testing")
         }
     }
 }

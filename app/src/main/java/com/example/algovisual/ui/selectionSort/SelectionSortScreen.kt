@@ -28,12 +28,9 @@ fun SelectionSortScreen(
     navController: NavController,
     selectionSortViewModel: SelectionSortViewModel = SelectionSortViewModel()
 ) {
-    val str = selectionSortViewModel.abc.collectAsState()
     val sortItem = selectionSortViewModel.sortItems.collectAsState()
 
-
     Column() {
-
         LazyColumn(){
             items(
                 items=sortItem.value,
@@ -43,11 +40,6 @@ fun SelectionSortScreen(
         }
         Button(onClick = { selectionSortViewModel.startSorting() }) {
             Text(text = "Sort")
-        }
-
-        Text(text = str.value)
-        Button(onClick = { selectionSortViewModel.testing() }) {
-            Text(text = "Testing")
         }
     }
 
