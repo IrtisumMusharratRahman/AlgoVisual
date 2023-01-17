@@ -1,7 +1,10 @@
 package com.example.algovisual.ui.bubbleSort
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,21 +23,23 @@ fun BubbleSortScreen(
 ) {
     val list = bubbleSortViewModel.itemList.collectAsState()
     val str = bubbleSortViewModel.abc.collectAsState()
-    
-    
+    val sortItem = bubbleSortViewModel.sortItems.collectAsState()
+
+    Log.e("TAG", "UI1: ${sortItem.value.toString()}")
     
     
     Column() {
+        Log.e("TAG", "UI2: ${sortItem.value.toString()}")
 
-        Text(text = list.value[0].value.toString()+" "+list.value[0].index.toString())
-        Text(text = list.value[1].value.toString()+" "+list.value[1].index.toString())
-        Text(text = list.value[2].value.toString()+" "+list.value[2].index.toString())
-        Text(text = list.value[3].value.toString()+" "+list.value[3].index.toString())
-        Text(text = list.value[4].value.toString()+" "+list.value[4].index.toString())
 
-//        for (item in list.value) {
-//            Text(text = item.value.toString() + " " + item.index.toString())
-//        }
+        LazyColumn(){
+            Log.e("TAG", "UI3: ${sortItem.value.toString()}")
+            items(
+                items=sortItem.value,
+            ){
+                Text(text = "${it.value}")
+            }
+        }
         Button(onClick = { bubbleSortViewModel.startSorting() }) {
             Text(text = "Sort")
         }
