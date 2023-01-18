@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
 
+    val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     var navController:NavController = rememberNavController()
@@ -66,20 +68,20 @@ fun MainScreen() {
             NavDrawerBody(){algoName->
                 pageName.value=algoName
                 when(algoName){
-                    "Bubble Sort" -> {
+                    context.getString(R.string.bubble_sort) -> {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
                         navController.navigate(NavScreens.BubbleSort.route)
 
                     }
-                    "Selection Sort" -> {
+                    context.getString(R.string.selection_sort) -> {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }
                         navController.navigate(NavScreens.SelectionSort.route)
                     }
-                    "Insertion Sort" -> {
+                    context.getString(R.string.insertion_sort) -> {
                         scope.launch {
                             scaffoldState.drawerState.close()
                         }

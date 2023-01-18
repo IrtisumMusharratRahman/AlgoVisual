@@ -80,7 +80,11 @@ fun SimpleSortUI(
                 shape = CircleShape,
                 onClick = { onButtonClicked() }
             ) {
-                Text(text = "Start Sorting", fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                Text(text = "Start Sorting",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
             }
 
         }

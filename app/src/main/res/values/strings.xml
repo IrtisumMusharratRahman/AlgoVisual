@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Algo Visual</string>
+    <string name="bubble_sort">Bubble Sort</string>
+    <string name="selection_sort">Selection Sort</string>
+    <string name="insertion_sort">Insertion Sort</string>
 </resources>

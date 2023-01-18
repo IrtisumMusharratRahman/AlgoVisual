@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.algovisual.ui.theme.BottomSheetBG
@@ -36,7 +37,12 @@ fun NavDrawerHeader() {
 
 @Composable
 fun NavDrawerBody(onItemClicked:(algo:String)->Unit) {
-    val algoNames = listOf<String>("Bubble Sort","Selection Sort","Insertion Sort")
+    val context = LocalContext.current
+    val algoNames = listOf<String>(
+        context.getString(com.example.algovisual.R.string.bubble_sort),
+        context.getString(com.example.algovisual.R.string.selection_sort),
+        context.getString(com.example.algovisual.R.string.insertion_sort),
+    )
 
     LazyColumn(
         modifier = Modifier
