@@ -30,11 +30,9 @@ class BubbleSortViewModel(
 
     fun startSorting(){
         viewModelScope.launch {
-            Log.e("TAG", "startSorting: start")
             bubbleSortAlgorithm(_itemList.value).collect{
                 _sortItems.value=it.toCollection(mutableListOf())
             }
-            Log.e("TAG", "startSorting: end")
         }
     }
 

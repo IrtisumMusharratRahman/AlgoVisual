@@ -1,7 +1,6 @@
 package com.example.algovisual
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,15 +12,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.algovisual.route.NavScreens
+import com.example.algovisual.route.Navigation
 import com.example.algovisual.ui.AppBar
 import com.example.algovisual.ui.NavDrawerBody
 import com.example.algovisual.ui.NavDrawerHeader
 import com.example.algovisual.ui.theme.AlgoVisualTheme
 import com.example.algovisual.ui.theme.background
-import com.example.algovisual.ui.theme.bg2
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {

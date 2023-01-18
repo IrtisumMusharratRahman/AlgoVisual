@@ -1,4 +1,4 @@
-package com.example.algovisual
+package com.example.algovisual.route
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController

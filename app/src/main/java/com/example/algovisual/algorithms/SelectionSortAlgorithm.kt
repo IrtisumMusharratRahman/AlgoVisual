@@ -11,21 +11,31 @@ class SelectionSortAlgorithm {
 
         var i=0
         val lastItemToCompare = list.size-1
-        emit(list)
-        delay(500)
 
         while(i<lastItemToCompare){
+
+            list[i].isCurrentlyCompared=true
+            emit(list)
+            delay(500)
+
             var j=i+1
             while (j<list.size){
+                list[j].isCurrentlyCompared=true
+                emit(list)
+                delay(500)
                 if (list[i].value>list[j].value){
                     Collections.swap(list,i,j)
                     emit(list)
-                    delay(5000)
+                    delay(500)
                 }
+                list[j].isCurrentlyCompared=false
                 j++
             }
+            list[i].isCurrentlyCompared=false
+            list[i].isSorted=true
             i++
         }
+        emit(list)
 
     }
 }
