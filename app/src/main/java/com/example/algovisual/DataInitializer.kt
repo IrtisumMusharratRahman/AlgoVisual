@@ -17,10 +17,9 @@ class DataInitializer {
                 }
             }
 
-            val index = i
+            val id = i
             val value = initData[i]
             val isCurrentlyCompared = false
-            val isSorted = false
             val color = Color(
                 when(colorIndex){
                     0 -> 0xFFE8F8F5
@@ -37,7 +36,7 @@ class DataInitializer {
                 }
             )
 
-            processedData.add(SortItem(index,value,isCurrentlyCompared,isSorted,color))
+            processedData.add(SortItem(id,value,isCurrentlyCompared,color))
         }
         return processedData
     }

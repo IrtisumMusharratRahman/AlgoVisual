@@ -1,5 +1,6 @@
 package com.example.algovisual.ui
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.Orientation
@@ -13,6 +14,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +33,9 @@ fun SimpleSortUI(
     sortItems: State<MutableList<SortItem>>,
     onButtonClicked:()->Unit
 ) {
-    val state = rememberScrollState()
+    val startColor = Color.Transparent
+    val endColor = Color.Red
+
 
     Box(
         modifier = Modifier
@@ -42,26 +47,23 @@ fun SimpleSortUI(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyColumn(
-                modifier = Modifier.padding(top = 10.dp, bottom = 5.dp)
+                modifier = Modifier
+                    .padding(top = 10.dp, bottom = 5.dp)
+                    .fillMaxHeight()
+                    .weight(1f)
             ){
                 items(
-                    items=sortItems.value,
+                    items=sortItems.value, key = { it.id }
                 ){
-                    val borderStroke = if (it.isSorted){
-                        BorderStroke(3.dp, Color.Green)
-                    }else if (it.isCurrentlyCompared){
-                        BorderStroke(3.dp, Color.Red)
-                    }else{
-                        BorderStroke(0.dp, Color.Transparent)
-                    }
+                    val borderColor by animateColorAsState( if (it.isCurrentlyCompared) endColor else startColor)
                     Box(
                         modifier = Modifier
                             .size(64.dp)
                             .padding(5.dp)
                             .background(color = it.color, shape = Shapes.large)
-                            .border(border = borderStroke, shape = Shapes.large)
+                            .border(width = 3.dp, color = borderColor, shape = Shapes.large)
                             .animateItemPlacement(
-                                animationSpec = tween(300)
+                                animationSpec = tween(1000)
                             ),
                         contentAlignment = Alignment.Center,
                     ){

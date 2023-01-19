@@ -9,33 +9,19 @@ import java.util.*
 class SelectionSortAlgorithm {
     suspend operator fun invoke(list: MutableList<SortItem>): Flow<MutableList<SortItem>> = flow {
 
-        var i=0
-        val lastItemToCompare = list.size-1
-
-        while(i<lastItemToCompare){
-
-            list[i].isCurrentlyCompared=true
-            emit(list)
-            delay(500)
-
-            var j=i+1
-            while (j<list.size){
-                list[j].isCurrentlyCompared=true
+        for (i in 0 until list.size-1){
+            for (j in i+1 until list.size){
                 emit(list)
-                delay(500)
-                if (list[i].value>list[j].value){
-                    Collections.swap(list,i,j)
+                delay(600)
+                if(list[i].value>list[j].value){
+                    val temp = list[i]
+                    list[i]=list[j]
+                    list[j]=temp
                     emit(list)
-                    delay(500)
+                    delay(1500)
                 }
-                list[j].isCurrentlyCompared=false
-                j++
             }
-            list[i].isCurrentlyCompared=false
-            list[i].isSorted=true
-            i++
         }
         emit(list)
-
     }
 }

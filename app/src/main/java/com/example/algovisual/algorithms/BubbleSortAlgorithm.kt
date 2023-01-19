@@ -13,34 +13,19 @@ class BubbleSortAlgorithm {
     suspend operator fun invoke(list: MutableList<SortItem>):Flow<MutableList<SortItem>> = flow {
 
 
-        var lastItemToCompare = list.size-1
-        while (lastItemToCompare>1){
-            var i=0
-
-            while (i<lastItemToCompare){
-
-                list[i].isCurrentlyCompared=true
+        //i=0;i<size;i++
+        for (i in 0 until list.size){
+            for (j in 0 until list.size-1-i){
                 emit(list)
-                delay(500)
-                list[i+1].isCurrentlyCompared=true
-                emit(list)
-                delay(1000)
-
-                if (list[i].value>list[i+1].value){
-                    Collections.swap(list, i, i+1)
-                    emit(list)
-                    delay(1000)
+                delay(1500)
+                if (list[j].value>list[j+1].value){
+                    val temp = list[j]
+                    list[j]=list[j+1]
+                    list[j+1]=temp
                 }
-                list[i].isCurrentlyCompared=false
-                list[i+1].isCurrentlyCompared=false
-                i++
             }
-            list[lastItemToCompare].isSorted=true
-            emit(list)
-            delay(500)
-            lastItemToCompare--
-
         }
         emit(list)
+
     }
 }
