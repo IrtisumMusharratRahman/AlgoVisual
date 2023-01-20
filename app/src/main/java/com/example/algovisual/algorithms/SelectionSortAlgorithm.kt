@@ -11,8 +11,14 @@ class SelectionSortAlgorithm {
 
         for (i in 0 until list.size-1){
             for (j in i+1 until list.size){
+
+                val firstItem = list[i]
+                val secondItem = list[j]
+                list[i]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
+                list[j]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
                 emit(list)
-                delay(600)
+                delay(1000)
+
                 if(list[i].value>list[j].value){
                     val temp = list[i]
                     list[i]=list[j]
@@ -20,6 +26,17 @@ class SelectionSortAlgorithm {
                     emit(list)
                     delay(1500)
                 }
+                val newFirstItemIndex = list.indexOfFirst {
+                    it.id==firstItem.id
+                }
+                val newSecondItemIndex = list.indexOfFirst {
+                    it.id==secondItem.id
+                }
+                list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,false,firstItem.color)
+                list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
+                emit(list)
+                delay(500)
+
             }
         }
         emit(list)

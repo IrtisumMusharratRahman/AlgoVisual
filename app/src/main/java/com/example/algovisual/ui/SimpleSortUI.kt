@@ -12,10 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,17 +28,20 @@ import java.lang.Float
 @Composable
 fun SimpleSortUI(
     sortItems: State<MutableList<SortItem>>,
-    onButtonClicked:()->Unit
+    advancedAlgo: Boolean = false,
+    advancedSortItems:State<MutableList<SortItem>> = mutableStateOf(mutableListOf()),
+    onButtonClicked: () -> Unit
 ) {
-    val startColor = Color.Transparent
-    val endColor = Color.Red
+    val defaultColor = Color.Transparent
+    val comparedColor = Color.Red
+    val pivotColor = Color.Green
 
 
     Box(
         modifier = Modifier
             .fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -51,11 +51,13 @@ fun SimpleSortUI(
                     .padding(top = 10.dp, bottom = 5.dp)
                     .fillMaxHeight()
                     .weight(1f)
-            ){
+            ) {
                 items(
-                    items=sortItems.value, key = { it.id }
-                ){
-                    val borderColor by animateColorAsState( if (it.isCurrentlyCompared) endColor else startColor)
+                    items = sortItems.value, key = { it.id }
+                ) {
+                    val endColor = if (it.isPivot) pivotColor else comparedColor
+                    val borderColor by animateColorAsState(if (it.isCurrentlyCompared) endColor else defaultColor)
+
                     Box(
                         modifier = Modifier
                             .size(64.dp)
@@ -66,8 +68,9 @@ fun SimpleSortUI(
                                 animationSpec = tween(1000)
                             ),
                         contentAlignment = Alignment.Center,
-                    ){
-                        Text(text = "${it.value}",
+                    ) {
+                        Text(
+                            text = "${it.value}",
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 25.sp,
                             color = Color.Black
@@ -82,7 +85,8 @@ fun SimpleSortUI(
                 shape = CircleShape,
                 onClick = { onButtonClicked() }
             ) {
-                Text(text = "Start Sorting",
+                Text(
+                    text = "Start Sorting",
                     fontSize = 15.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White

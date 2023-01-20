@@ -26,25 +26,43 @@ class QuickSortAlgorithm {
 
     private suspend fun partition(list: MutableList<SortItem>, low: Int, high: Int): Int {
 
-        val pivotIndex = high
-        val pivot = list[pivotIndex]
-        Log.e("TAG", "partition: ${pivot.value}")
         var i = low-1
+        val pivotIndex = high
+        val pivot = list[pivotIndex].copy()
 
-        list[pivotIndex]=SortItem(pivot.id,pivot.value,true,pivot.color)
-
+        list[pivotIndex]=SortItem(pivot.id,pivot.value,true,pivot.color,true)
         sortInfoFlow.emit(list)
         delay(1000)
 
+
+        var firstItem = list[low].copy()
         for (j in low until high){
+
+            val secondItem = list[j].copy()
+            list[j]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
+            sortInfoFlow.emit(list)
+            delay(1000)
+
             if (list[j].value<=pivot.value){
                 i++
+            firstItem = list[i].copy()
+            list[i]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
                 val temp = list[i]
                 list[i]=list[j]
                 list[j]=temp
+                sortInfoFlow.emit(list)
+                delay(1200)
             }
+            val newFirstItemIndex = list.indexOfFirst {
+                it.id==firstItem.id
+            }
+            val newSecondItemIndex = list.indexOfFirst {
+                it.id==secondItem.id
+            }
+            list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,false,firstItem.color)
+            list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
             sortInfoFlow.emit(list)
-            delay(1100)
+            delay(500)
         }
         val temp = list[i+1]
         list[i+1]=list[high]

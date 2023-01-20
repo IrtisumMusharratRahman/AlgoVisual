@@ -36,7 +36,7 @@ class DataInitializer {
                 }
             )
 
-            processedData.add(SortItem(id,value,isCurrentlyCompared,color))
+            processedData.add(SortItem(id = id, value = value, isCurrentlyCompared = isCurrentlyCompared, color = color))
         }
         return processedData
     }
