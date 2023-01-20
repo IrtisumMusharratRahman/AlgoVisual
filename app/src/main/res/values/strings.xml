@@ -3,4 +3,5 @@
     <string name="bubble_sort">Bubble Sort</string>
     <string name="selection_sort">Selection Sort</string>
     <string name="insertion_sort">Insertion Sort</string>
+    <string name="merge_sort">Merge Sort</string>
 </resources>

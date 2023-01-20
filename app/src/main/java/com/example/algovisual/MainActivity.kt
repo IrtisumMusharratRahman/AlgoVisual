@@ -20,6 +20,7 @@ import com.example.algovisual.route.Navigation
 import com.example.algovisual.ui.AppBar
 import com.example.algovisual.ui.NavDrawerBody
 import com.example.algovisual.ui.NavDrawerHeader
+import com.example.algovisual.ui.mergeSort.MergeSortScreen
 import com.example.algovisual.ui.theme.AlgoVisualTheme
 import com.example.algovisual.ui.theme.background
 import kotlinx.coroutines.launch
@@ -86,6 +87,12 @@ fun MainScreen() {
                             scaffoldState.drawerState.close()
                         }
                         navController.navigate(NavScreens.InsertionSort.route)
+                    }
+                    context.getString(R.string.merge_sort) -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(NavScreens.MergeSort.route)
                     }
                 }
             }

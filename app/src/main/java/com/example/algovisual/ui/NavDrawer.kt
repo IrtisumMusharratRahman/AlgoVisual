@@ -42,6 +42,7 @@ fun NavDrawerBody(onItemClicked:(algo:String)->Unit) {
         context.getString(com.example.algovisual.R.string.bubble_sort),
         context.getString(com.example.algovisual.R.string.selection_sort),
         context.getString(com.example.algovisual.R.string.insertion_sort),
+        context.getString(com.example.algovisual.R.string.merge_sort)
     )
 
     LazyColumn(

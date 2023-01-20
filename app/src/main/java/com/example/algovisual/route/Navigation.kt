@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.algovisual.ui.bubbleSort.BubbleSortScreen
 import com.example.algovisual.ui.insertionSort.InsertionSortScreen
+import com.example.algovisual.ui.mergeSort.MergeSortScreen
 import com.example.algovisual.ui.selectionSort.SelectionSortScreen
 
 @Composable
@@ -24,6 +25,9 @@ fun Navigation(getNavController: (navController:NavController)-> Unit) {
         }
         composable(route = NavScreens.InsertionSort.route){
             InsertionSortScreen(navController = navController)
+        }
+        composable(route = NavScreens.MergeSort.route){
+            MergeSortScreen(navController = navController)
         }
 
     }
