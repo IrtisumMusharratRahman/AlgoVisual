@@ -12,42 +12,46 @@ class MergeSortAlgorithm {
 
     suspend operator fun invoke(list: MutableList<SortItem>,depth:Int):MutableList<SortItem>{
 
-        delay(500)
-        sortInfoFlow.emit(MergeSortInfo(0,list,SortStatue.DIVIDED))
-
+        delay(1500)
+        sortInfoFlow.emit(MergeSortInfo(
+            depth = depth,
+            sortParts = list,
+            sortState = SortStatue.DIVIDED,
+        )
+        )
         val listSize = list.size
-        if (listSize<=1){
+        if (listSize <= 1) {
             return list
         }
-
-        var leftList = list.slice(0 until (listSize+1)/2)
-        var rightList = list.slice((listSize+1)/2 until listSize)
-        leftList=this(leftList.toMutableList(),depth+1)
-        rightList=this(rightList.toMutableList(),depth+1)
-        return merge(leftList.toMutableList(),rightList.toMutableList(),depth)
+        //14 -> 0 .. 6 and 7 .. 13
+        //13 -> 0 .. 6 and 7 .. 12
+        var leftList = list.slice(0 until (listSize + 1) / 2)
+        var rightList = list.slice((listSize + 1) / 2 until listSize)
+        leftList = this(leftList.toMutableList(), depth + 1)
+        rightList = this(rightList.toMutableList(),depth + 1)
+        return merge(leftList.toMutableList(), rightList.toMutableList(), depth)
     }
 
-    private suspend fun merge(
-        leftList:MutableList<SortItem>,
-        rightList:MutableList<SortItem>,
-        depth: Int
-    ):MutableList<SortItem>{
+    private suspend fun merge(leftList:MutableList<SortItem>, rightList:MutableList<SortItem>, depth:Int):MutableList<SortItem>{
 
-        val mergedList = mutableListOf<SortItem>()
+        val mergeList = mutableListOf<SortItem>()
         while (leftList.isNotEmpty() && rightList.isNotEmpty()){
-            if (leftList.first().value <= rightList.first().value){
-                mergedList.add(leftList.removeFirst())
+            if(leftList.first().value <= rightList.first().value){
+                mergeList.add(mergeList.size,leftList.removeFirst())
             }else{
-                mergedList.add(rightList.removeFirst())
+                mergeList.add(mergeList.size,rightList.removeFirst())
             }
         }
-        mergedList.addAll(leftList)
-        mergedList.addAll(rightList)
-
-        delay(500)
-        sortInfoFlow.emit(MergeSortInfo(depth,mergedList,SortStatue.MERGED))
-
-        return mergedList
+        mergeList.addAll(leftList)
+        mergeList.addAll(rightList)
+        delay(1500)
+        sortInfoFlow.emit(MergeSortInfo(
+            depth = depth,
+            sortParts = mergeList,
+            sortState = SortStatue.MERGED,
+        )
+        )
+        return mergeList
 
     }
 

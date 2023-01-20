@@ -7,5 +7,6 @@ sealed class NavScreens(val route:String){
     object SelectionSort: NavScreens("selectionSort")
     object InsertionSort: NavScreens("insertionSort")
     object MergeSort: NavScreens("mergeSort")
+    object QuickSort: NavScreens("quickSort")
 
 }

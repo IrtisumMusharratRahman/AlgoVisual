@@ -16,7 +16,7 @@ class MergeSortViewModel(
     val dataInitializer: DataInitializer = DataInitializer()
 ):ViewModel() {
 
-    private val initialList = listOf<Int>(40,70,30,10,20,80,50,90,60)
+    private val initialList = listOf<Int>(40,70,30,10,20,80,50,60)
 
     var list = dataInitializer(initialList)
     var sortUIData = mutableStateListOf<MergeSortUIData>()

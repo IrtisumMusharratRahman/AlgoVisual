@@ -94,6 +94,12 @@ fun MainScreen() {
                         }
                         navController.navigate(NavScreens.MergeSort.route)
                     }
+                    context.getString(R.string.quick_sort) -> {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(NavScreens.QuickSort.route)
+                    }
                 }
             }
         }

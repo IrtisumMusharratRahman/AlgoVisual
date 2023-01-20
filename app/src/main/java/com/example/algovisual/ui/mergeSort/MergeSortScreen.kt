@@ -2,6 +2,7 @@ package com.example.algovisual.ui.mergeSort
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.algovisual.model.MergeSortUIData
+import com.example.algovisual.model.SortItem
 import com.example.algovisual.ui.insertionSort.InsertionSortViewModel
 import com.example.algovisual.ui.theme.ContainerBg
 
@@ -28,13 +30,12 @@ fun MergeSortScreen(
     navController: NavController,
     mergeSortViewModel: MergeSortViewModel = MergeSortViewModel()
 ) {
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(10.dp),
         contentAlignment = Alignment.Center
-    ) {
+    ){
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -47,8 +48,8 @@ fun MergeSortScreen(
                 key = { _, it ->
                     it.id
                 }
-            ){ index: Int, item: MergeSortUIData ->
-                val depthParts = item.sortParts
+            ){ index, it ->
+                val depthParts = it.sortParts.map { it.map { it.value } }
                 if(index == 0){
                     Text(
                         "Dividing",
@@ -76,13 +77,13 @@ fun MergeSortScreen(
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
-                ) {
+                ){
                     for(part in depthParts){
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(5.dp),
+                            horizontalArrangement = Arrangement.spacedBy(2.dp),
                             modifier = Modifier
-                                .padding(start = if (depthParts.indexOf(part) == 0) 0.dp else 17.dp)
-                                .background(item.color, RoundedCornerShape(10.dp))
+                                .padding(start = if (depthParts.indexOf(part) == 0) 0.dp else 12.dp)
+                                .background(it.color, RoundedCornerShape(10.dp))
                                 .padding(5.dp)
 
                         ){
@@ -92,14 +93,14 @@ fun MergeSortScreen(
                                         "$numberInformation |",
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White,
-                                        fontSize = 19.sp
+                                        fontSize = 16.sp
                                     )
                                 }else{
                                     Text(
                                         "$numberInformation",
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White,
-                                        fontSize = 19.sp
+                                        fontSize = 16.sp
                                     )
                                 }
 
@@ -107,6 +108,7 @@ fun MergeSortScreen(
                         }
                     }
                 }
+
             }
         }
         Column(
@@ -118,7 +120,7 @@ fun MergeSortScreen(
             verticalArrangement = Arrangement.spacedBy(15.dp)
         ){
             Text(
-                "${mergeSortViewModel.list}",
+                "${mergeSortViewModel.list.map { it.value }}",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -128,7 +130,6 @@ fun MergeSortScreen(
                     mergeSortViewModel.startSorting()
                 },
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = ContainerBg,
                     contentColor = Color.White
                 ),
                 modifier = Modifier
@@ -144,5 +145,8 @@ fun MergeSortScreen(
 
         }
     }
-    
+
+
+
+
 }
