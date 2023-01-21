@@ -15,9 +15,12 @@ fun BubbleSortScreen(
     bubbleSortViewModel: BubbleSortViewModel = viewModel()
 ) {
     val sortItem = bubbleSortViewModel.sortItems.collectAsState()
+    val isNotSorting = bubbleSortViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(sortItems = sortItem) {
-        bubbleSortViewModel.startSorting()
-    }
-
+    SimpleSortUI(
+        sortItems = sortItem,
+        isNotSorting = isNotSorting,
+        onButtonClicked = {bubbleSortViewModel.startSorting()},
+        shuffle = {bubbleSortViewModel.shuffle()}
+    )
 }

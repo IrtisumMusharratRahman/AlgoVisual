@@ -13,8 +13,12 @@ fun QuickSortScreen(
     quickSortSViewModel: QuickSortSViewModel = viewModel()
 ) {
     val sortItem = quickSortSViewModel.sortItems.collectAsState()
+    val isNotSorting = quickSortSViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(sortItems = sortItem) {
-        quickSortSViewModel.startSorting()
-    }
+    SimpleSortUI(
+        sortItems = sortItem,
+        isNotSorting = isNotSorting,
+        onButtonClicked = {quickSortSViewModel.startSorting()},
+        shuffle = {quickSortSViewModel.shuffle()}
+    )
 }

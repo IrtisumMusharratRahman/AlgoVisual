@@ -19,8 +19,8 @@ class BubbleSortAlgorithm {
 
                 val firstItem = list[j]
                 val secondItem = list[j+1]
-                list[j]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
-                list[j+1]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
+                list[j]=firstItem.copy(isCurrentlyCompared = true)
+                list[j+1]=secondItem.copy(isCurrentlyCompared = true)
                 emit(list)
                 delay(1000)
 
@@ -38,8 +38,8 @@ class BubbleSortAlgorithm {
                 val newSecondItemIndex = list.indexOfFirst {
                     it.id==secondItem.id
                 }
-                list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,false,firstItem.color)
-                list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
+                list[newFirstItemIndex]=firstItem.copy(isCurrentlyCompared = false)
+                list[newSecondItemIndex]=secondItem.copy(isCurrentlyCompared = false)
                 emit(list)
                 delay(500)
 

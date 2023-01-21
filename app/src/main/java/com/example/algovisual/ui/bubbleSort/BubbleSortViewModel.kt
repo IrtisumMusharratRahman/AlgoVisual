@@ -23,17 +23,26 @@ class BubbleSortViewModel(
     private val _itemList = MutableStateFlow(list)
     val itemList = _itemList.asStateFlow()
 
+    private val _isNotSorting = MutableStateFlow(true)
+    val isNotSorting = _isNotSorting.asStateFlow()
+
     val lst = list.toCollection(mutableListOf())
     private var _sortItems = MutableStateFlow(lst)
     val sortItems = _sortItems.asStateFlow()
 
 
     fun startSorting(){
+        _isNotSorting.value=false
         viewModelScope.launch {
             bubbleSortAlgorithm(_itemList.value).collect{
                 _sortItems.value=it.toCollection(mutableListOf())
             }
         }
+    }
+    fun shuffle(){
+        val shuffled = list.shuffled()
+        _sortItems.value = shuffled.toMutableList()
+        _itemList.value = shuffled.toMutableList()
     }
 
 }

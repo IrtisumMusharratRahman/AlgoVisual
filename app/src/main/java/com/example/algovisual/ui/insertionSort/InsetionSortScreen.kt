@@ -11,9 +11,12 @@ fun InsertionSortScreen(
     insertionSortViewModel: InsertionSortViewModel= InsertionSortViewModel()
 ) {
     val sortItem = insertionSortViewModel.sortItems.collectAsState()
+    val isNotSorting = insertionSortViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(sortItems = sortItem) {
-        insertionSortViewModel.startSorting()
-    }
-
+    SimpleSortUI(
+        sortItems = sortItem,
+        isNotSorting = isNotSorting,
+        onButtonClicked = {insertionSortViewModel.startSorting()},
+        shuffle = {insertionSortViewModel.shuffle()}
+    )
 }

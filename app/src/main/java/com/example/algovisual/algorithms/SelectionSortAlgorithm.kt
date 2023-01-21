@@ -14,8 +14,8 @@ class SelectionSortAlgorithm {
 
                 val firstItem = list[i]
                 val secondItem = list[j]
-                list[i]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
-                list[j]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
+                list[i]=firstItem.copy(isCurrentlyCompared = true)
+                list[j]=secondItem.copy(isCurrentlyCompared = true)
                 emit(list)
                 delay(1000)
 
@@ -32,8 +32,8 @@ class SelectionSortAlgorithm {
                 val newSecondItemIndex = list.indexOfFirst {
                     it.id==secondItem.id
                 }
-                list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,false,firstItem.color)
-                list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
+                list[newFirstItemIndex]=firstItem.copy(isCurrentlyCompared = false)
+                list[newSecondItemIndex]=secondItem.copy(isCurrentlyCompared = false)
                 emit(list)
                 delay(500)
 

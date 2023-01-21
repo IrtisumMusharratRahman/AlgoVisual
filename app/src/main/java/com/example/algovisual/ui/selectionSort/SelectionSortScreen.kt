@@ -12,9 +12,12 @@ fun SelectionSortScreen(
     selectionSortViewModel: SelectionSortViewModel = SelectionSortViewModel()
 ) {
     val sortItem = selectionSortViewModel.sortItems.collectAsState()
+    val isNotSorting = selectionSortViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(sortItems = sortItem) {
-        selectionSortViewModel.startSorting()
-    }
-
+    SimpleSortUI(
+        sortItems = sortItem,
+        isNotSorting = isNotSorting,
+        onButtonClicked = {selectionSortViewModel.startSorting()},
+        shuffle = {selectionSortViewModel.shuffle()}
+    )
 }

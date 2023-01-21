@@ -11,10 +11,10 @@ class InsertionSortAlgorithm {
     suspend operator fun invoke(list: MutableList<SortItem>): Flow<MutableList<SortItem>> = flow {
 
         val initial = list[0].copy()
-        list[0]=SortItem(initial.id,initial.value,true,initial.color)
+        list[0]=initial.copy(isCurrentlyCompared = true)
         emit(list)
         delay(1000)
-        list[0]=SortItem(initial.id,initial.value,false,initial.color)
+        list[0]=initial.copy(isCurrentlyCompared = false)
         emit(list)
         delay(500)
 
@@ -24,13 +24,13 @@ class InsertionSortAlgorithm {
             var j = i
 
             val firstItem = list[i].copy()
-            list[i]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
+            list[i]=firstItem.copy(isCurrentlyCompared = true)
             emit(list)
             delay(1000)
 
 
             var secondItem = list[j-1].copy()
-            list[j-1]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
+            list[j-1]=secondItem.copy(isCurrentlyCompared = true)
             emit(list)
             delay(1000)
 
@@ -42,35 +42,34 @@ class InsertionSortAlgorithm {
                 val newFirstItemIndex = list.indexOfFirst {
                     it.id==firstItem.id
                 }
-                list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,true,firstItem.color)
+                list[newFirstItemIndex]=firstItem.copy(isCurrentlyCompared = true)
                 emit(list)
                 delay(1200)
 
                 val newSecondItemIndex = list.indexOfFirst {
                     it.id==secondItem.id
                 }
-                list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
+                list[newSecondItemIndex]=secondItem.copy(isCurrentlyCompared = false)
                 emit(list)
                 delay(500)
 
                 j -= 1
                 if(j-1>=0){
                     secondItem = list[j-1].copy()
-                    list[j-1]=SortItem(secondItem.id,secondItem.value,true,secondItem.color)
+                    list[j-1]=secondItem.copy(isCurrentlyCompared = true)
                     emit(list)
                     delay(1000)
 
                 }
             }
-//            list[j] = item
             val newSecondItemIndex = list.indexOfFirst {
                 it.id==secondItem.id
             }
-            list[newSecondItemIndex]=SortItem(secondItem.id,secondItem.value,false,secondItem.color)
+            list[newSecondItemIndex]=secondItem.copy(isCurrentlyCompared = false)
             val newFirstItemIndex = list.indexOfFirst {
                 it.id==firstItem.id
             }
-            list[newFirstItemIndex]=SortItem(firstItem.id,firstItem.value,false,firstItem.color)
+            list[newFirstItemIndex]=firstItem.copy(isCurrentlyCompared = false)
             emit(list)
             delay(500)
 
