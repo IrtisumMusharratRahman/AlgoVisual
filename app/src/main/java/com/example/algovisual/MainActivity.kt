@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -11,8 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.algovisual.route.NavScreens
@@ -59,14 +62,20 @@ fun MainScreen() {
                     }
                 },
                 appBarTitle = {
-                    Text(text = pageName.value, textAlign = TextAlign.Center)
+                    Text(
+                        text = pageName.value,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Start,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp,
+                    )
                 }
             )
         },
 //        drawerGesturesEnabled = scaffoldState.drawerState.isClosed,
         drawerContent = {
             NavDrawerHeader()
-            NavDrawerBody(){algoName->
+            NavDrawerBody(pageName.value){algoName->
                 pageName.value=algoName
                 when(algoName){
                     context.getString(R.string.bubble_sort) -> {

@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.algovisual.ui.SimpleSortUI
+import com.example.algovisual.ui.CommonUI
 
 
 @Composable
@@ -17,10 +17,11 @@ fun BubbleSortScreen(
     val sortItem = bubbleSortViewModel.sortItems.collectAsState()
     val isNotSorting = bubbleSortViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(
+    CommonUI(
         sortItems = sortItem,
         isNotSorting = isNotSorting,
         onButtonClicked = {bubbleSortViewModel.startSorting()},
-        shuffle = {bubbleSortViewModel.shuffle()}
+        shuffle = {bubbleSortViewModel.shuffle()},
+        restart = {bubbleSortViewModel.restart()}
     )
 }

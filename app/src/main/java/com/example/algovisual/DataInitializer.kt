@@ -2,6 +2,7 @@ package com.example.algovisual
 
 import androidx.compose.ui.graphics.Color
 import com.example.algovisual.model.SortItem
+import com.example.algovisual.ui.theme.*
 
 class DataInitializer {
     operator fun invoke(initData:List<Int>):MutableList<SortItem>{
@@ -20,21 +21,21 @@ class DataInitializer {
             val id = i
             val value = initData[i]
             val isCurrentlyCompared = false
-            val color = Color(
+            val color =
                 when(colorIndex){
-                    0 -> 0xFFE8F8F5
-                    1 -> 0xFFD1F2EB
-                    2 -> 0xFFA3E4D7
-                    3 -> 0xFF76D7C4
-                    4 -> 0xFF48C9B0
-                    5 -> 0xFF1ABC9C
-                    6 -> 0xFF17A589
-                    7 -> 0xFF148F77
-                    8 -> 0xFF117864
-                    9 -> 0xFF0E6251
-                    else -> 0xFFFFFFFF
+                    0 -> index0
+                    1 -> index1
+                    2 -> index2
+                    3 -> index3
+                    4 -> index4
+                    5 -> index5
+                    6 -> index6
+                    7 -> index7
+                    8 -> index8
+                    9 -> index9
+                    else -> colorException
                 }
-            )
+
 
             processedData.add(SortItem(id = id, value = value, isCurrentlyCompared = isCurrentlyCompared, color = color))
         }

@@ -3,7 +3,7 @@ package com.example.algovisual.ui.insertionSort
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavController
-import com.example.algovisual.ui.SimpleSortUI
+import com.example.algovisual.ui.CommonUI
 
 @Composable
 fun InsertionSortScreen(
@@ -13,10 +13,11 @@ fun InsertionSortScreen(
     val sortItem = insertionSortViewModel.sortItems.collectAsState()
     val isNotSorting = insertionSortViewModel.isNotSorting.collectAsState()
 
-    SimpleSortUI(
+    CommonUI(
         sortItems = sortItem,
         isNotSorting = isNotSorting,
         onButtonClicked = {insertionSortViewModel.startSorting()},
-        shuffle = {insertionSortViewModel.shuffle()}
+        shuffle = {insertionSortViewModel.shuffle()},
+        restart = {insertionSortViewModel.restart()}
     )
 }

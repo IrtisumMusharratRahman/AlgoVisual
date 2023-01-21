@@ -126,20 +126,14 @@ fun MergeSortScreen(
                 color = Color.White
             )
             Button(
-                onClick = {
-                    mergeSortViewModel.startSorting()
-                },
-                colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(CircleShape)
-            ){
+                shape = CircleShape,
+                onClick = { mergeSortViewModel.startSorting() }
+            ) {
                 Text(
-                    "Start sort",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
+                    text = "Start Sorting",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
                 )
             }
 

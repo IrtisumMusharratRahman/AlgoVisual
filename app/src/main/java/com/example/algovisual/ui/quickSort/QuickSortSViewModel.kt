@@ -19,8 +19,7 @@ class QuickSortSViewModel(
 
     private val list = dataInitializer(initialList)
 
-    private val _itemList = MutableStateFlow(list)
-    val itemList = _itemList.asStateFlow()
+    private val _itemList = MutableStateFlow(list.toCollection(mutableListOf()))
 
     private val _isNotSorting = MutableStateFlow(true)
     val isNotSorting = _isNotSorting.asStateFlow()
@@ -34,17 +33,24 @@ class QuickSortSViewModel(
         _isNotSorting.value=false
         viewModelScope.launch {
             quickSortAlgorithm(_itemList.value,0,_itemList.value.size-1)
+            _isNotSorting.value=true
         }
+
         viewModelScope.launch {
             quickSortAlgorithm.sortInfoFlow.collect{
                 _sortItems.value=it.toCollection(mutableListOf())
             }
+
         }
     }
     fun shuffle(){
         val shuffled = list.shuffled()
         _sortItems.value = shuffled.toMutableList()
         _itemList.value = shuffled.toMutableList()
+    }
+    fun restart(){
+        _sortItems.value = list.toCollection(mutableListOf())
+        _itemList.value = list.toCollection(mutableListOf())
     }
 
 }
