@@ -12,7 +12,7 @@ class MergeSortAlgorithm {
 
     suspend operator fun invoke(list: MutableList<SortItem>,depth:Int):MutableList<SortItem>{
 
-        delay(1500)
+        delay(1000)
         sortInfoFlow.emit(MergeSortInfo(
             depth = depth,
             sortParts = list,
@@ -23,18 +23,23 @@ class MergeSortAlgorithm {
         if (listSize <= 1) {
             return list
         }
-        //14 -> 0 .. 6 and 7 .. 13
-        //13 -> 0 .. 6 and 7 .. 12
+
         var leftList = list.slice(0 until (listSize + 1) / 2)
         var rightList = list.slice((listSize + 1) / 2 until listSize)
+
+
         leftList = this(leftList.toMutableList(), depth + 1)
         rightList = this(rightList.toMutableList(),depth + 1)
+
+
         return merge(leftList.toMutableList(), rightList.toMutableList(), depth)
     }
 
     private suspend fun merge(leftList:MutableList<SortItem>, rightList:MutableList<SortItem>, depth:Int):MutableList<SortItem>{
 
         val mergeList = mutableListOf<SortItem>()
+
+
         while (leftList.isNotEmpty() && rightList.isNotEmpty()){
             if(leftList.first().value <= rightList.first().value){
                 mergeList.add(mergeList.size,leftList.removeFirst())
@@ -42,15 +47,18 @@ class MergeSortAlgorithm {
                 mergeList.add(mergeList.size,rightList.removeFirst())
             }
         }
+
+
         mergeList.addAll(leftList)
         mergeList.addAll(rightList)
-        delay(1500)
+        delay(1000)
         sortInfoFlow.emit(MergeSortInfo(
             depth = depth,
             sortParts = mergeList,
             sortState = SortStatue.MERGED,
-        )
-        )
+        ))
+
+
         return mergeList
 
     }

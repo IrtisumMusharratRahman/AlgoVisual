@@ -1,13 +1,18 @@
 package com.example.algovisual.ui.mergeSort
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.algovisual.AlgoDetails
 import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.MergeSortAlgorithm
 import com.example.algovisual.model.MergeSortUIData
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -16,17 +21,40 @@ class MergeSortViewModel(
     val dataInitializer: DataInitializer = DataInitializer()
 ):ViewModel() {
 
-    private val initialList = listOf<Int>(40,70,30,10,20,80,50,60)
+    private val initialList = listOf<Int>(50,70,90,20,30,60,80,40)
 
     var list = dataInitializer(initialList)
     var sortUIData = mutableStateListOf<MergeSortUIData>()
     private var job:Job?=null
+    private var status = true
+
+    val details =AlgoDetails.MergeSort
+
+    private val _itemList = MutableStateFlow(list.toCollection(mutableListOf()))
 
     fun startSorting(){
-        sortUIData.clear()
-        viewModelScope.launch {
-            mergeSortAlgorithm(list,0)
+
+        if (status){
+
+            sortUIData.clear()
+            _itemList.value=list.toCollection(mutableListOf())
+
+            viewModelScope.launch {
+                mergeSortAlgorithm(_itemList.value, 0)
+            }.runCatching {
+                if (this.isActive){
+                    status=false
+                }
+                this.invokeOnCompletion { status=true}
+            }
         }
+
+
+        dataCollection()
+    }
+
+
+    fun dataCollection(){
         job?.cancel()
         job=viewModelScope.launch {
             mergeSortAlgorithm.sortInfoFlow.collect{mergeSortInfo->
@@ -41,11 +69,6 @@ class MergeSortViewModel(
                             depth = mergeSortInfo.depth,
                             sortParts = listOf(mergeSortInfo.sortParts),
                             sortStatue = mergeSortInfo.sortState,
-                            color = Color(
-                                (0..255).random(),
-                                (0..255).random(),
-                                (0..255).random()
-                            )
                         )
                     )
                 }else{

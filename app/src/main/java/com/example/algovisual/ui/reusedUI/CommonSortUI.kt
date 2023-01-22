@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,17 +19,17 @@ import androidx.compose.ui.unit.sp
 import com.example.algovisual.R
 import com.example.algovisual.model.SortItem
 import com.example.algovisual.ui.theme.Shapes
-import com.example.algovisual.ui.theme.primary
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CommonUI(
+fun CommonSortUI(
     sortItems: State<MutableList<SortItem>>,
     isNotSorting: State<Boolean>,
     onButtonClicked: () -> Unit,
     shuffle: () -> Unit,
-    restart: () -> Unit
+    restart: () -> Unit,
+    bottomSheet: () -> Unit
 ) {
     val defaultColor = Color.Transparent
     val comparedColor = Color.Red
@@ -43,6 +40,16 @@ fun CommonUI(
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        IconButton(
+            modifier = Modifier.align(Alignment.TopEnd),
+            onClick = { bottomSheet() }
+        ) {
+            Icon(
+                modifier = Modifier.size(35.dp),
+                painter = painterResource(id = R.drawable.ic_baseline_read_more_24),
+                contentDescription = null
+            )
+        }
         Column(
             modifier= Modifier
                 .fillMaxHeight(),
@@ -129,10 +136,5 @@ fun CommonUI(
         }
 
     }
-
-}
-
-@Composable
-fun ttt() {
 
 }

@@ -2,6 +2,7 @@ package com.example.algovisual.ui.quickSort
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.algovisual.AlgoDetails
 import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.MergeSortAlgorithm
 import com.example.algovisual.algorithms.QuickSortAlgorithm
@@ -15,17 +16,15 @@ class QuickSortSViewModel(
     val dataInitializer: DataInitializer = DataInitializer()
 ):ViewModel() {
 
-    private var initialList = listOf<Int>(40,70,30,10,20,80,50,90,60)
-
+    private var initialList = listOf<Int>(50,10,70,90,20,30,60,80,40)
     private val list = dataInitializer(initialList)
-
     private val _itemList = MutableStateFlow(list.toCollection(mutableListOf()))
+    val details = AlgoDetails.QuickSort
 
     private val _isNotSorting = MutableStateFlow(true)
     val isNotSorting = _isNotSorting.asStateFlow()
 
-    val lst = list.toCollection(mutableListOf())
-    private var _sortItems = MutableStateFlow(lst)
+    private var _sortItems = MutableStateFlow(list.toCollection(mutableListOf()))
     val sortItems = _sortItems.asStateFlow()
 
 
@@ -43,11 +42,13 @@ class QuickSortSViewModel(
 
         }
     }
+
     fun shuffle(){
         val shuffled = list.shuffled()
         _sortItems.value = shuffled.toMutableList()
         _itemList.value = shuffled.toMutableList()
     }
+
     fun restart(){
         _sortItems.value = list.toCollection(mutableListOf())
         _itemList.value = list.toCollection(mutableListOf())
