@@ -4,4 +4,10 @@
     <style name="Theme.AlgoVisual" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/dark</item>
     </style>
+    <style name="Theme.AlgoSplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/applogo</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.AlgoVisual</item>
+    </style>
 </resources>
