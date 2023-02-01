@@ -1,18 +1,13 @@
 package com.example.algovisual.ui.mergeSort
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.algovisual.AlgoDetails
 import com.example.algovisual.DataInitializer
-import com.example.algovisual.algorithms.MergeSortAlgorithm
-import com.example.algovisual.model.MergeSortUIData
+import com.example.algovisual.algorithms.AdvancedSort.MergeSortAlgorithm
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
 

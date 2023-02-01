@@ -5,11 +5,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.algovisual.ui.bubbleSort.BubbleSortScreen
-import com.example.algovisual.ui.insertionSort.InsertionSortScreen
+import com.example.algovisual.AlgoDetails
+import com.example.algovisual.algorithms.SimpleSort.BubbleSortAlgorithm
+import com.example.algovisual.algorithms.SimpleSort.InsertionSortAlgorithm
+import com.example.algovisual.algorithms.SimpleSort.SelectionSortAlgorithm
 import com.example.algovisual.ui.mergeSort.MergeSortScreen
 import com.example.algovisual.ui.quickSort.QuickSortScreen
-import com.example.algovisual.ui.selectionSort.SelectionSortScreen
+import com.example.algovisual.ui.simpleSortingAlgorithm.SimpleSortingAlgorithmScreen
+import com.example.algovisual.ui.simpleSortingAlgorithm.SimpleSortingAlgorithmViewModel
 
 @Composable
 fun Navigation(getNavController: (navController:NavController)-> Unit) {
@@ -19,13 +22,25 @@ fun Navigation(getNavController: (navController:NavController)-> Unit) {
     NavHost(navController = navController, startDestination = NavScreens.BubbleSort.route ){
 
         composable(route = NavScreens.BubbleSort.route){
-            BubbleSortScreen(navController = navController)
+//            BubbleSortScreen(navController = navController)
+            SimpleSortingAlgorithmScreen(
+                navController = navController,
+                sortViewModel = SimpleSortingAlgorithmViewModel(sortAlgorithm = BubbleSortAlgorithm(), details = AlgoDetails.BubbleSort)
+            )
         }
         composable(route = NavScreens.SelectionSort.route){
-            SelectionSortScreen(navController = navController)
+//            SelectionSortScreen(navController = navController)
+            SimpleSortingAlgorithmScreen(
+                navController = navController,
+                sortViewModel = SimpleSortingAlgorithmViewModel(sortAlgorithm = SelectionSortAlgorithm(), details = AlgoDetails.SelectionSort)
+            )
         }
         composable(route = NavScreens.InsertionSort.route){
-            InsertionSortScreen(navController = navController)
+//            InsertionSortScreen(navController = navController)
+            SimpleSortingAlgorithmScreen(
+                navController = navController,
+                sortViewModel = SimpleSortingAlgorithmViewModel(sortAlgorithm = InsertionSortAlgorithm(), details = AlgoDetails.InsertionSort)
+            )
         }
         composable(route = NavScreens.MergeSort.route){
             MergeSortScreen(navController = navController)

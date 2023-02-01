@@ -1,27 +1,23 @@
-package com.example.algovisual.ui.bubbleSort
-
+package com.example.algovisual.ui.simpleSortingAlgorithm
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.unit.dp
-
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.algovisual.ui.CommonSortUI
 import com.example.algovisual.ui.reusedUI.BottomSheet
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BubbleSortScreen(
+fun SimpleSortingAlgorithmScreen(
     navController: NavController,
-    bubbleSortViewModel: BubbleSortViewModel = viewModel()
+    sortViewModel: SimpleSortingAlgorithmViewModel
 ) {
-    val sortItem = bubbleSortViewModel.sortItems.collectAsState()
-    val isNotSorting = bubbleSortViewModel.isNotSorting.collectAsState()
+    val sortItem = sortViewModel.sortItems.collectAsState()
+    val isNotSorting = sortViewModel.isNotSorting.collectAsState()
 
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
@@ -34,15 +30,15 @@ fun BubbleSortScreen(
         scaffoldState = bottomSheetScaffoldState,
         sheetPeekHeight = 0.dp,
         sheetContent = {
-            BottomSheet(algoDetails = bubbleSortViewModel.details)
+            BottomSheet(algoDetails = sortViewModel.details)
         }
     ) {
         CommonSortUI(
             sortItems = sortItem,
             isNotSorting = isNotSorting,
-            onButtonClicked = {bubbleSortViewModel.startSorting()},
-            shuffle = {bubbleSortViewModel.shuffle()},
-            restart = {bubbleSortViewModel.restart()},
+            onButtonClicked = {sortViewModel.startSorting()},
+            shuffle = {sortViewModel.shuffle()},
+            restart = {sortViewModel.restart()},
             bottomSheet = {
                 if (bottomSheetScaffoldState.bottomSheetState.isCollapsed){
                     coroutineScope.launch {

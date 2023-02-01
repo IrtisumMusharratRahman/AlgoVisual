@@ -1,4 +1,7 @@
-package com.example.algovisual.model
+package com.example.algovisual.ui.mergeSort
+
+import com.example.algovisual.model.SortItem
+import com.example.algovisual.model.SortStatue
 
 
 data class MergeSortUIData(

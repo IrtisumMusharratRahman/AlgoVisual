@@ -34,6 +34,7 @@ fun CommonSortUI(
     val defaultColor = Color.Transparent
     val comparedColor = Color.Red
     val pivotColor = Color.Green
+    var borderColor:Color
 
     Box(
         modifier = Modifier
@@ -67,7 +68,13 @@ fun CommonSortUI(
                     items = sortItems.value, key = { it.id }
                 ) {
 //                    val endColor = if (it.isPivot) pivotColor else comparedColor
-                    val borderColor by animateColorAsState(if (it.isCurrentlyCompared) comparedColor else defaultColor)
+                    val bColor by animateColorAsState(if (it.isCurrentlyCompared) comparedColor else defaultColor)
+
+                    borderColor = if (it.alreadyVisited){
+                        Color.Blue
+                    }else{
+                        bColor
+                    }
 
                     Box(
                         modifier = Modifier

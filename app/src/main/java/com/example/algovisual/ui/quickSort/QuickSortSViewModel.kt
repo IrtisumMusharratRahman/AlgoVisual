@@ -4,11 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.algovisual.AlgoDetails
 import com.example.algovisual.DataInitializer
-import com.example.algovisual.algorithms.MergeSortAlgorithm
-import com.example.algovisual.algorithms.QuickSortAlgorithm
+import com.example.algovisual.algorithms.AdvancedSort.QuickSortAlgorithm
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class QuickSortSViewModel(

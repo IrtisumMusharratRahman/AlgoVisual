@@ -1,4 +1,4 @@
-package com.example.algovisual.algorithms
+package com.example.algovisual.algorithms.AdvancedSort
 
 import com.example.algovisual.model.MergeSortInfo
 import com.example.algovisual.model.SortItem

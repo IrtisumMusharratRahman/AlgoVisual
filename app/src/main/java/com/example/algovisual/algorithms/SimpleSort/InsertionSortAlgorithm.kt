@@ -1,14 +1,12 @@
-package com.example.algovisual.algorithms
+package com.example.algovisual.algorithms.SimpleSort
 
-import android.util.Log
 import com.example.algovisual.model.SortItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.util.*
 
-class InsertionSortAlgorithm {
-    suspend operator fun invoke(list: MutableList<SortItem>): Flow<MutableList<SortItem>> = flow {
+class InsertionSortAlgorithm : SimpleSortAlgorithm {
+    override suspend operator fun invoke(list: MutableList<SortItem>): Flow<MutableList<SortItem>> = flow {
 
         val initial = list[0].copy()
         list[0]=initial.copy(isCurrentlyCompared = true)

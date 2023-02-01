@@ -7,5 +7,6 @@ data class SortItem(
     val value: Int,
     var isCurrentlyCompared:Boolean,
     val color: Color,
-    var isPivot:Boolean=false
+    var isPivot:Boolean=false,
+    var alreadyVisited:Boolean=false
 )
