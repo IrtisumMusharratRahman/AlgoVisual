@@ -1,4 +1,4 @@
-package com.example.algovisual
+package com.example.algovisual.algorithms
 
 enum class AlgoDetails(val bestCase:String,val worstCase:String,val avarageCase:String,val spaceComplexity:String,val stability:String,) {
 

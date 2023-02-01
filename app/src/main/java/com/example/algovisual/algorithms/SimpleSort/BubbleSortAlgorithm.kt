@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.flow
 class BubbleSortAlgorithm : SimpleSortAlgorithm {
     override suspend operator fun invoke(list: MutableList<SortItem>):Flow<MutableList<SortItem>> = flow {
 
-
-        //i=0;i<size;i++
         for (i in 0 until list.size){
             for (j in 0 until list.size-1-i){
 

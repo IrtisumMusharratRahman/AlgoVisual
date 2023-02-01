@@ -3,7 +3,7 @@ package com.example.algovisual.ui.mergeSort
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.algovisual.AlgoDetails
+import com.example.algovisual.algorithms.AlgoDetails
 import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.AdvancedSort.MergeSortAlgorithm
 import kotlinx.coroutines.Job
@@ -16,14 +16,17 @@ class MergeSortViewModel(
     val dataInitializer: DataInitializer = DataInitializer()
 ):ViewModel() {
 
-    private val initialList = listOf<Int>(50,70,90,20,30,60,80,40)
-
-    var list = dataInitializer(initialList)
+    private val initialList = listOf<Int>(10,50,70,90,20,30,60,80,40)
+    var initializedLit = dataInitializer(initialList)
+    init {
+        initializedLit.removeAt(0)
+    }
+    var list = initializedLit.toCollection(mutableListOf())
     var sortUIData = mutableStateListOf<MergeSortUIData>()
     private var job:Job?=null
     private var status = true
 
-    val details =AlgoDetails.MergeSort
+    val details = AlgoDetails.MergeSort
 
     private val _itemList = MutableStateFlow(list.toCollection(mutableListOf()))
 

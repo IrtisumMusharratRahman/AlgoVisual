@@ -1,5 +1,6 @@
 package com.example.algovisual.algorithms.AdvancedSort
 
+import android.util.Log
 import com.example.algovisual.model.SortItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,15 +16,21 @@ class QuickSortAlgorithm {
             this(list, low, cut - 1)
             this(list, cut + 1, high)
         }else{
-            if (!list[high].alreadyVisited){
-                list[high]=list[high].copy(isPivot = true)
-                sortInfoFlow.emit(list)
-                delay(1000)
-                list[high]=list[high].copy(isPivot = false)
-                sortInfoFlow.emit(list)
-                delay(500)
-                list[high]=list[high].copy(alreadyVisited = true)
-            }
+            try {
+                if (high<list.size && high>=0){
+                    if (!list[high].alreadyVisited){
+                        list[high]=list[high].copy(isPivot = true)
+                        sortInfoFlow.emit(list)
+                        delay(1000)
+                        list[high]=list[high].copy(isPivot = false)
+                        sortInfoFlow.emit(list)
+                        delay(500)
+                        list[high]=list[high].copy(alreadyVisited = true)
+                    }
+                }
+            }catch (e:Exception){ }
+
+
         }
 
         sortInfoFlow.emit(list)

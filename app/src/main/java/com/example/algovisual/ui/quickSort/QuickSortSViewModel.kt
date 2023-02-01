@@ -2,7 +2,7 @@ package com.example.algovisual.ui.quickSort
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.algovisual.AlgoDetails
+import com.example.algovisual.algorithms.AlgoDetails
 import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.AdvancedSort.QuickSortAlgorithm
 import kotlinx.coroutines.flow.MutableStateFlow

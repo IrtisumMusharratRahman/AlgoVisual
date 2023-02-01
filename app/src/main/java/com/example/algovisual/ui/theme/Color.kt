@@ -13,6 +13,12 @@ val BottomSheetBG = Color(0xFF404040)
 val background = Color(0xFF121212)
 val primary = Color(0xFF282828)
 
+
+val defaultColor = Color.Transparent
+val comparedColor = Color.Red
+val pivotColor = Color.Yellow
+val alreadyCompared = Color(0xFFF4D03F)
+
 val index0 = Color(0xFFE8F8F5)
 val index1 = Color(0xFFD1F2EB)
 val index2 = Color(0xFFA3E4D7)

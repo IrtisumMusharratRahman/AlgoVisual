@@ -2,7 +2,7 @@ package com.example.algovisual.ui.simpleSortingAlgorithm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.algovisual.AlgoDetails
+import com.example.algovisual.algorithms.AlgoDetails
 import com.example.algovisual.DataInitializer
 import com.example.algovisual.algorithms.SimpleSort.SimpleSortAlgorithm
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class SimpleSortingAlgorithmViewModel(
     val sortAlgorithm: SimpleSortAlgorithm,
-    val details:AlgoDetails,
+    val details: AlgoDetails,
     val dataInitializer: DataInitializer = DataInitializer()
 ): ViewModel() {
 

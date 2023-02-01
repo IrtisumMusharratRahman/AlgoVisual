@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.algovisual.R
 import com.example.algovisual.model.SortItem
-import com.example.algovisual.ui.theme.Shapes
+import com.example.algovisual.ui.theme.*
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -31,9 +31,6 @@ fun CommonSortUI(
     restart: () -> Unit,
     bottomSheet: () -> Unit
 ) {
-    val defaultColor = Color.Transparent
-    val comparedColor = Color.Red
-    val pivotColor = Color.Green
     var borderColor:Color
 
     Box(
@@ -67,11 +64,10 @@ fun CommonSortUI(
                 items(
                     items = sortItems.value, key = { it.id }
                 ) {
-//                    val endColor = if (it.isPivot) pivotColor else comparedColor
                     val bColor by animateColorAsState(if (it.isCurrentlyCompared) comparedColor else defaultColor)
 
                     borderColor = if (it.alreadyVisited){
-                        Color.Blue
+                        alreadyCompared
                     }else{
                         bColor
                     }
@@ -81,7 +77,7 @@ fun CommonSortUI(
                             .size(64.dp)
                             .padding(5.dp)
                             .background(
-                                color = if (it.isPivot) Color.Yellow else it.color,
+                                color = if (it.isPivot) pivotColor else it.color,
                                 shape = Shapes.medium
                             )
                             .border(width = 3.dp, color = borderColor, shape = Shapes.medium)

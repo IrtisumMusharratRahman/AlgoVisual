@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.algovisual.AlgoDetails
+import com.example.algovisual.algorithms.AlgoDetails
 import com.example.algovisual.ui.theme.BottomSheetBG
 import com.example.algovisual.ui.theme.ContainerBg
 import com.example.algovisual.ui.theme.Shapes
